@@ -11,8 +11,7 @@ import sys, logging
 import multiprocessing
 import time
 
-
-
+import main
 
 
 
@@ -22,11 +21,13 @@ api = Api(app)
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 
-# @app.route('/getBaseURL', methods=['GET'])
-# def getBaseURL():
-#     query = (request.args.get('query')).lower()
+@app.route('/encrypt', methods=['GET'])
+def encrypt():
+    username = request.args.get('username')
+    filename = request.args.get('filename')
     
-#     return get_base_url(query)
+    return get_base_url(query)
+
 
 # @app.route('/getInitialData', methods=['POST'])
 # def getInitialData():
@@ -37,10 +38,3 @@ app.logger.setLevel(logging.ERROR)
 #     headers = request_data["headers"]
     
 #     return get_canvas_course_data(base_url, base_target, headers)
-
-
-
-app.debug = True
-
-if __name__ == '__main__':
-    app.run()
